@@ -42,8 +42,14 @@
         .contacts-container { max-width: 500px; margin: 0 auto; text-align: center; background: #161822; padding: 40px 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.02); }
         .contacts-section h2 { font-size: 32px; margin-bottom: 15px; color: #fff; }
         .contacts-container p { color: #9ca3af; font-size: 16px; margin-bottom: 30px; line-height: 1.6; }
+        
+        /* Две удобные кнопки */
+        .btn-box { display: flex; flex-direction: column; gap: 15px; }
         .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 16px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-submit:hover { background: #00aed4; }
+        .btn-secondary { background: transparent; color: #00c6ff; border: 2px solid #00c6ff; }
+        .btn-secondary:hover { background: rgba(0, 198, 255, 0.1); }
+        
         footer { padding: 30px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
@@ -100,7 +106,7 @@
         <div class="portfolio-grid">
             <div class="portfolio-item">
                 <h4>01. Брендирование текстиля</h4>
-                <p>Нанесение износостойких логотипов на elements промо-формы, спецодежду, худи и кепки для компаний.</p>
+                <p>Нанесение износостойких логотипов на элементы промо-формы, спецодежду, худи и кепки для компаний.</p>
             </div>
             <div class="portfolio-item">
                 <h4>02. Наружные конструкции</h4>
@@ -134,9 +140,13 @@
     <section class="contacts-section" id="contacts">
         <h2>Обсудить ваш проект</h2>
         <div class="contacts-container">
-            <p>Свяжитесь с нами напрямую по телефону, чтобы оперативно обсудить детали вашего заказа, подобрать технологию нанесения и рассчитать точную стоимость.</p>
-            <!-- ПРЯМОЙ И БЕЗОТКАЗНЫЙ ЗВОНОК НА НОМЕР МАМЫ -->
-            <a href="tel:+79500503004" class="btn-submit">Позвонить и заказать расчет</a>
+            <p>Свяжитесь с нами удобным для вас способом. Вы можете позвонить напрямую по телефону или отправить нам текстовое сообщение на электронную почту.</p>
+            <div class="btn-box">
+                <!-- Кнопка 1: Звонок -->
+                <a href="tel:+79500503004" class="btn-submit">Позвонить по телефону</a>
+                <!-- Кнопка 2: Письмо -->
+                <a href="mailto:Tandem38-irk@yandex.ru?subject=Заказ расчета проекта ООО ТАНДЕМ" class="btn-submit btn-secondary">Написать нам на почту</a>
+            </div>
         </div>
     </section>
     <footer>
@@ -153,4 +163,3 @@
         calculateTotal();
     </script>
 </body>
-</html>
