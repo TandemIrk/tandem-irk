@@ -9,7 +9,6 @@
         body { background-color: #0d0e12; color: #f3f4f6; scroll-behavior: smooth; padding-top: 100px; overflow-x: hidden; }
         header { display: flex; justify-content: space-between; padding: 20px 8%; align-items: center; background: rgba(22, 24, 34, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; width: 100%; top: 0; left: 0; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.06); }
         .logo { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 1px; }
-        .logo span { color: #00c6ff; text-shadow: 0 0 10px rgba(0, 198, 255, 0.6); }
         nav a { color: #9ca3af; text-decoration: none; margin: 0 15px; font-weight: 500; font-size: 15px; transition: color 0.3s ease; position: relative; }
         nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #00c6ff; transition: width 0.3s ease; }
         nav a:hover { color: #00c6ff; }
@@ -21,15 +20,31 @@
         @keyframes pulseBadge { 0% { box-shadow: 0 0 0 0 rgba(0, 198, 255, 0.3); } 70% { box-shadow: 0 0 0 10px rgba(0, 198, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 198, 255, 0); } }
         .hero h1 { font-size: 52px; margin-bottom: 25px; color: #fff; font-weight: 800; line-height: 1.25; }
         .hero h1 span { color: #00c6ff; text-shadow: 0 0 20px rgba(0, 198, 255, 0.35); }
-        .hero p { font-size: 19px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6; }        .services { padding: 60px 8%; text-align: center; }
-        .services h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
+        .hero p { font-size: 19px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6; }        /* Новые стили для раскрывающихся карточек */
+        .services { padding: 60px 8%; text-align: center; }
+        .services h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
+        .services-sub { color: #9ca3af; font-size: 16px; margin-bottom: 40px; }
         .grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
-        .card { background: #161822; padding: 35px; border-radius: 18px; width: 31%; text-align: left; border: 1px solid rgba(255,255,255,0.02); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; cursor: pointer; }
-        .card:hover { transform: translateY(-8px) scale(1.02); background: #1c1f2f; border-color: rgba(0, 198, 255, 0.35); box-shadow: 0 20px 40px rgba(0, 198, 255, 0.1), 0 15px 30px rgba(0,0,0,0.5); }
-        .card h3 { font-size: 22px; margin-bottom: 20px; color: #fff; transition: all 0.3s ease; }
-        .card:hover h3 { color: #00c6ff; transform: translateX(5px); }
-        .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 2; }
+        
+        .card-label { width: 31%; cursor: pointer; display: block; text-align: left; }
+        .card-input { display: none; } /* Прячем стандартный чекбокс */
+        
+        .card { background: #161822; padding: 35px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.02); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; height: 100%; }
+        .card:hover { transform: translateY(-5px); background: #1c1f2f; border-color: rgba(0, 198, 255, 0.35); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        .card h3 { font-size: 22px; margin-bottom: 15px; color: #fff; transition: all 0.3s ease; }
+        .card:hover h3 { color: #00c6ff; }
+        .card .hint { font-size: 13px; color: #00c6ff; margin-bottom: 15px; opacity: 0.7; font-weight: 500; }
+        .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 2; margin-bottom: 15px; }
         .card ul li::before { content: "✓ "; color: #00c6ff; margin-right: 5px; font-weight: bold; }
+        
+        /* Скрытое подробное описание */
+        .card-details { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0, 198, 255, 0.03); border-radius: 10px; padding: 0 15px; border: 0 solid rgba(0, 198, 255, 0.15); }
+        .card-details p { font-size: 14px; color: #e5e7eb; line-height: 1.6; padding: 15px 0; }
+        
+        /* Магия CSS: при клике карточка раскрывается */
+        .card-input:checked + .card { background: #1c1f2f; border-color: #00c6ff; box-shadow: 0 0 25px rgba(0, 198, 255, 0.15); }
+        .card-input:checked + .card .card-details { max-height: 300px; opacity: 1; padding: 5px 15px; border-width: 1px; margin-top: 15px; }
+        .card-input:checked + .card .hint { color: #00ffcc; font-weight: bold; }
         .portfolio { padding: 60px 8%; text-align: center; }
         .portfolio h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
         .portfolio-grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
@@ -38,25 +53,20 @@
         .portfolio-item h4 { font-size: 19px; color: #00c6ff; margin-bottom: 12px; }
         .portfolio-item p { font-size: 14px; color: #9ca3af; line-height: 1.6; }
         .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid rgba(0, 198, 255, 0.15); box-shadow: 0 25px 50px rgba(0,0,0,0.5); transition: all 0.3s ease; }
-        .calc-section:hover { border-color: rgba(0, 198, 255, 0.35); box-shadow: 0 25px 50px rgba(0, 198, 255, 0.05), 0 20px 40px rgba(0,0,0,0.6); }
         .calc-section h2 { font-size: 32px; margin-bottom: 35px; color: #fff; }
         .form-group { margin-bottom: 25px; text-align: left; }
         .form-group label { display: block; margin-bottom: 10px; color: #9ca3af; font-weight: 500; }
         .form-group select, .form-group input { width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,0.08); background: #0d0e12; color: #fff; border-radius: 10px; font-size: 16px; transition: all 0.3s ease; outline: none; }
-        .form-group select:focus, .form-group input:focus { border-color: #00c6ff; box-shadow: 0 0 12px rgba(0, 198, 255, 0.25); background: #11131a; }
         .result-box { background: rgba(0, 198, 255, 0.04); padding: 25px; border-radius: 14px; margin-top: 25px; border: 1px dashed rgba(0, 198, 255, 0.2); }
         .result-box span { font-size: 38px; font-weight: bold; color: #00c6ff; text-shadow: 0 0 15px rgba(0, 198, 255, 0.5); }
         .contacts-section { padding: 80px 8%; text-align: center; background: #090a0d; }
         .contacts-container { max-width: 550px; margin: 0 auto; text-align: center; background: #161822; padding: 45px 35px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .contacts-section h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
-        .contacts-container p { color: #9ca3af; font-size: 16px; margin-bottom: 35px; line-height: 1.7; }
         .btn-box { display: flex; flex-direction: column; gap: 15px; }
-        .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+        .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
         .btn-primary { animation: pulseBtn 2s infinite; }
         @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.015); box-shadow: 0 0 20px rgba(0, 198, 255, 0.4); } 100% { transform: scale(1); } }
-        .btn-primary:hover { background: #00aed4; animation: none; transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(0, 198, 255, 0.4); }
         .btn-secondary { background: transparent; color: #00c6ff; border: 2px solid #00c6ff; }
-        .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 198, 255, 0.15); }
+        .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; transform: translateY(-3px); }
         footer { padding: 40px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.8; }
     </style>
 </head>
@@ -76,38 +86,61 @@
         <h1>Нанесение логотипов, наружная реклама <br><span>и POS-материалы от ТАНДЕМ</span></h1>
         <p>Собственная производственная база. Брендируем текстиль, изготавливаем рекламные вывески и конструкции любой сложности для бизнеса в Иркутской области.</p>
     </section>
+    
     <section class="services" id="services">
         <h2>Наши производственные возможности</h2>
+        <p class="services-sub">Нажмите на любую карточку, чтобы узнать подробности услуги</p>
         <div class="grid">
-            <div class="card">
-                <h3>👑 Логотипы на одежду</h3>
-                <ul>
-                    <li>Корпоративные худи и футболки</li>
-                    <li>Нанесение принтов и вышивка</li>
-                    <li>Промо-форма и спецодежда</li>
-                    <li>DTF и шелкография</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>🏢 Наружная реклама</h3>
-                <ul>
-                    <li>Объемные световые буквы</li>
-                    <li>Световые короба и вывески</li>
-                    <li>Широкоформатная печать</li>
-                    <li>Монтаж в Иркутске и области</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>📦 POS-материалы</h3>
-                <ul>
-                    <li>Ростовые фигуры и дисплеи</li>
-                    <li>Воблеры и шелфтокеры</li>
-                    <li>Брендированные промо-стойки</li>
-                    <li>Конструкции для ритейла</li>
-                </ul>
-            </div>
+            <!-- КАРТОЧКА 1 -->
+            <label class="card-label" for="serve-1">
+                <input type="checkbox" id="serve-1" class="card-input">
+                <div class="card">
+                    <h3>👑 Логотипы на одежду</h3>
+                    <p class="hint">▶ Нажмите, чтобы узнать подробнее</p>
+                    <ul>
+                        <li>Корпоративные худи и футболки</li>
+                        <li>Нанесение принтов и вышивка</li>
+                    </ul>
+                    <div class="card-details">
+                        <p>Мы создаем брендированную одежду под ключ. Шьем и закупаем качественные заготовки футболок, худи, бейсболок и промо-формы. Делаем долговечную DTF-печать, шелкографию и премиальную компьютерную вышивку шевронов, которая не сотрется после 100 стирок. Идеально для корпоративного стиля и мерча!</p>
+                    </div>
+                </div>
+            </label>
+            
+            <!-- КАРТОЧКА 2 -->
+            <label class="card-label" for="serve-2">
+                <input type="checkbox" id="serve-2" class="card-input">
+                <div class="card">
+                    <h3>🏢 Наружная реклама</h3>
+                    <p class="hint">▶ Нажмите, чтобы узнать подробнее</p>
+                    <ul>
+                        <li>Объемные световые буквы</li>
+                        <li>Световые короба и вывески</li>
+                    </ul>
+                    <div class="card-details">
+                        <p>Полный цикл производства рекламных конструкций в Иркутске. Изготавливаем яркие объемные световые буквы, лайтбоксы (световые короба), фасадные вывески и баннеры. Используем только надежные и экономичные светодиоды. Сами спроектируем дизайн, изготовим каркас и аккуратно смонтируем на вашем объекте.</p>
+                    </div>
+                </div>
+            </label>
+            
+            <!-- КАРТОЧКА 3 -->
+            <label class="card-label" for="serve-3">
+                <input type="checkbox" id="serve-3" class="card-input">
+                <div class="card">
+                    <h3>📦 POS-материалы</h3>
+                    <p class="hint">▶ Нажмите, чтобы узнать подробнее</p>
+                    <ul>
+                        <li>Ростовые фигуры и дисплеи</li>
+                        <li>Воблеры и шелфтокеры</li>
+                    </ul>
+                    <div class="card-details">
+                        <p>Оформление зон продаж в супермаркетах и магазинах Иркутской области. Производим ростовые фигуры из прочного пластика, брендированные промо-стойки, воблеры, шелфтокеры и паллетные декорации. Помогаем вашему товару выгодно выделиться на полке и привлечь максимум внимания покупателей!</p>
+                    </div>
+                </div>
+            </label>
         </div>
     </section>
+    
     <section class="portfolio" id="portfolio">
         <h2>Примеры готовой продукции</h2>
         <div class="portfolio-grid">
