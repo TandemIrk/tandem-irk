@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ТАНДЕМ | Производство рекламы и мерча Иркутск, Марково</title>
     <style>
-        /* Базовые переменные цвета для кастомизации интерфейса */
+        /* Базовые цвета для кастомизации сайта БЕЗ СКРИПТОВ */
         :root { --main-neon: #00c6ff; --neon-shadow: rgba(0, 198, 255, 0.6); }
-        body.matrix-theme { --main-neon: #00ff66; --neon-shadow: rgba(0, 255, 102, 0.6); }
-        body.purple-theme { --main-neon: #cc00ff; --neon-shadow: rgba(204, 0, 255, 0.6); }
+        #theme-matrix:checked ~ * { --main-neon: #00ff66; --neon-shadow: rgba(0, 255, 102, 0.6); }
+        #theme-purple:checked ~ * { --main-neon: #cc00ff; --neon-shadow: rgba(204, 0, 255, 0.6); }
+        #theme-cyan:checked ~ * { --main-neon: #00c6ff; --neon-shadow: rgba(0, 198, 255, 0.6); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0d0e12; color: #f3f4f6; scroll-behavior: smooth; padding-top: 100px; overflow-x: hidden; transition: background 0.3s; }
+        body { background-color: #0d0e12; color: #f3f4f6; scroll-behavior: smooth; padding-top: 100px; overflow-x: hidden; }
         
         header { display: flex; justify-content: space-between; padding: 20px 8%; align-items: center; background: rgba(22, 24, 34, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; width: 100%; top: 0; left: 0; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .logo { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 1px; cursor: pointer; user-select: none; }
-        .logo span { color: var(--main-neon); text-shadow: 0 0 10px var(--neon-shadow); transition: all 0.3s; }
         
+        .logo-btn { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 1px; cursor: pointer; user-select: none; }
+        .logo-btn span { color: var(--main-neon); text-shadow: 0 0 10px var(--neon-shadow); transition: all 0.3s; }
+        
+        /* Скрытая панель кастомизации на чистом CSS */
         #custom-panel { display: none; background: #161822; padding: 10px 20px; border-radius: 30px; border: 1px solid var(--main-neon); position: fixed; top: 90px; left: 8%; z-index: 9998; gap: 10px; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        #toggle-panel:checked ~ #custom-panel { display: flex; }
         .color-dot { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid #fff; }
 
         nav a { color: #9ca3af; text-decoration: none; margin: 0 15px; font-weight: 500; font-size: 15px; transition: color 0.3s ease; position: relative; }
@@ -26,15 +30,15 @@
         nav a:hover::after { width: 100%; }
         
         .phone-link { color: #fff; text-decoration: none; font-weight: bold; background: rgba(0, 198, 255, 0.08); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--main-neon); transition: all 0.3s ease; }
-        .phone-link:hover { background: var(--main-neon); color: #0d0e12; box-shadow: 0 0 20px var(--neon-shadow); transform: translateY(-2px); }        /* ТВОЙ НОВЫЙ ФОН ИЗ ШЕДЕВРУМА С ЗАМЫТИЕМ И ПРИТЕМНЕНИЕМ */
+        .phone-link:hover { background: var(--main-neon); color: #0d0e12; box-shadow: 0 0 20px var(--neon-shadow); transform: translateY(-2px); }
+        /* Твой сочный замыленный фон из Шедеврума */
         .hero { 
             padding: 120px 8% 140px 8%; 
             text-align: center; 
             position: relative;
-            background: linear-gradient(rgba(13, 14, 18, 0.82), rgba(13, 14, 18, 0.92)), 
+            background: linear-gradient(rgba(13, 14, 18, 0.85), rgba(13, 14, 18, 0.95)), 
                         url('fabric.jpg') no-repeat center/cover;
-            background-attachment: fixed;
-            backdrop-filter: blur(4px); /* Автоматическое красивое размытие фона */
+            background-attachment: fixed; /* Эффект параллакса глубокого скролла */
         }
         .hero .badge { background: rgba(0, 198, 255, 0.1); color: var(--main-neon); padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 25px; display: inline-block; border: 1px solid var(--main-neon); }
         .hero h1 { font-size: 52px; margin-bottom: 25px; color: #fff; font-weight: 800; line-height: 1.25; }
@@ -58,7 +62,6 @@
         .card-details p { font-size: 14px; color: #e5e7eb; line-height: 1.6; padding: 15px 0; }
         .card-input:checked + .card { background: #1c1f2f; border-color: var(--main-neon); box-shadow: 0 0 25px rgba(0, 198, 255, 0.15); }
         .card-input:checked + .card .card-details { max-height: 350px; opacity: 1; padding: 5px 15px; margin-top: 15px; border: 1px solid rgba(0, 198, 255, 0.15); }
-        
         .portfolio { padding: 60px 8%; text-align: center; }
         .portfolio h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
         .portfolio-grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
@@ -67,15 +70,26 @@
         .portfolio-item h4 { font-size: 19px; color: var(--main-neon); margin-bottom: 12px; }
         .portfolio-item p { font-size: 14px; color: #9ca3af; line-height: 1.6; }
         
-        .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid var(--main-neon); box-shadow: 0 25px 50px rgba(0,0,0,0.5); transition: border-color 0.3s ease; }
-        .calc-section:hover { border-color: var(--main-neon); }
-        .calc-section h2 { font-size: 32px; margin-bottom: 35px; color: #fff; }
-        .form-group { margin-bottom: 25px; text-align: left; }
-        .form-group label { display: block; margin-bottom: 10px; color: #9ca3af; font-weight: 500; }
-        .form-group select, .form-group input { width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,0.08); background: #0d0e12; color: #fff; border-radius: 10px; font-size: 16px; transition: all 0.3s ease; outline: none; }
-        .form-group select:focus, .form-group input:focus { border-color: var(--main-neon); box-shadow: 0 0 12px rgba(0, 198, 255, 0.25); background: #11131a; }
+        /* Инновационный калькулятор на чистом CSS с помощью радиокнопок */
+        .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid var(--main-neon); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .calc-section h2 { font-size: 32px; margin-bottom: 25px; color: #fff; }
+        .calc-toggle { display: none; }
+        .calc-options { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .calc-btn { background: #0d0e12; border: 1px solid rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 10px; cursor: pointer; color: #9ca3af; font-weight: 500; transition: 0.3s; }
+        .calc-btn:hover { border-color: var(--main-neon); color: #fff; }
+        
         .result-box { background: rgba(0, 198, 255, 0.04); padding: 25px; border-radius: 14px; margin-top: 25px; border: 1px dashed rgba(0, 198, 255, 0.2); }
         .result-box span { font-size: 38px; font-weight: bold; color: var(--main-neon); text-shadow: 0 0 15px var(--neon-shadow); }
+        .result-box .val { display: none; }
+        
+        /* Логика отображения цены на чистом CSS */
+        #calc-odezhda:checked ~ .calc-section .opt-o { background: var(--main-neon); color: #0d0e12; border-color: var(--main-neon); box-shadow: 0 0 15px var(--neon-shadow); }
+        #calc-odezhda:checked ~ .calc-section .val-o { display: block; }
+        #calc-reklama:checked ~ .calc-section .opt-r { background: var(--main-neon); color: #0d0e12; border-color: var(--main-neon); box-shadow: 0 0 15px var(--neon-shadow); }
+        #calc-reklama:checked ~ .calc-section .val-r { display: block; }
+        #calc-pos:checked ~ .calc-section .opt-p { background: var(--main-neon); color: #0d0e12; border-color: var(--main-neon); box-shadow: 0 0 15px var(--neon-shadow); }
+        #calc-pos:checked ~ .calc-section .val-p { display: block; }
+
         .contacts-section { padding: 80px 8%; text-align: center; background: #090a0d; }
         .contacts-container { max-width: 550px; margin: 0 auto; text-align: center; background: #161822; padding: 45px 35px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         .contacts-section h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
@@ -92,27 +106,31 @@
         .delivery-badge h4 { color: #00ffcc; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
         .delivery-badge ul { list-style: none; color: #e5e7eb; font-size: 14px; line-height: 1.8; }
         .delivery-badge ul li::before { content: "⚡ "; color: #00ffcc; margin-right: 5px; font-weight: bold; }
-        
         footer { padding: 40px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.8; }
+        .invisible-input { display: none; }
     </style>
 </head>
 <body>
+    <!-- Скрытые триггеры кастомизации и калькулятора на чистом HTML -->
+    <input type="radio" name="theme-select" id="theme-cyan" class="invisible-input" checked>
+    <input type="radio" name="theme-select" id="theme-matrix" class="invisible-input">
+    <input type="radio" name="theme-select" id="theme-purple" class="invisible-input">
+    <input type="checkbox" id="toggle-panel" class="invisible-input">
+    <input type="radio" name="calc-select" id="calc-odezhda" class="invisible-input" checked>
+    <input type="radio" name="calc-select" id="calc-reklama" class="invisible-input">
+    <input type="radio" name="calc-select" id="calc-pos" class="invisible-input">
+
     <header>
-        <div class="logo" onclick="toggleCustomPanel()"><span>ТАНДЕМ</span></div>
-        <nav>
-            <a href="#services">Услуги</a>
-            <a href="#portfolio">Работы</a>
-            <a href="#calc">Калькулятор</a>
-            <a href="#contacts">Контакты</a>
-        </nav>
+        <label class="logo-btn" for="toggle-panel"><span>ТАНДЕМ</span></label>
+        <nav><a href="#services">Услуги</a><a href="#portfolio">Работы</a><a href="#calc">Калькулятор</a><a href="#contacts">Контакты</a></nav>
         <a href="tel:+79500503004" class="phone-link">8 (950) 050-30-04</a>
     </header>
 
     <div id="custom-panel">
-        <span style="font-size: 12px; color: #9ca3af; font-weight: bold; text-transform: uppercase;">Стиль:</span>
-        <div class="color-dot" style="background: #00c6ff;" onclick="changeTheme('cyan')"></div>
-        <div class="color-dot" style="background: #00ff66;" onclick="changeTheme('matrix')"></div>
-        <div class="color-dot" style="background: #cc00ff;" onclick="changeTheme('purple')"></div>
+        <span style="font-size: 12px; color: #9ca3af; font-weight: bold;">СТИЛЬ:</span>
+        <label class="color-dot" style="background: #00c6ff;" for="theme-cyan"></label>
+        <label class="color-dot" style="background: #00ff66;" for="theme-matrix"></label>
+        <label class="color-dot" style="background: #cc00ff;" for="theme-purple"></label>
     </div>
     
     <section class="hero">
@@ -169,7 +187,6 @@
             </label>
         </div>
     </section>
-    
     <section class="portfolio" id="portfolio">
         <h2>Примеры готовой продукции</h2>
         <div class="portfolio-grid">
@@ -181,9 +198,17 @@
     
     <section class="calc-section" id="calc">
         <h2>Быстрый онлайн-расчет заказа</h2>
-        <div class="form-group"><label for="category">Выберите направление:</label><select id="category" onchange="calculateTotal()"><option value="350">Нанесение на одежду (350 ₽/шт)</option><option value="15000">Наружная реклама (базовый заказ от 15 000 ₽)</option><option value="250">POS-материалы (мелкий опт от 250 ₽/шт)</option></select></div>
-        <div class="form-group"><label for="quantity">Укажите планируемый тираж / объём:</label><input type="number" id="quantity" value="100" min="1" oninput="calculateTotal()"></div>
-        <div class="result-box"><p style="font-size: 14px; color: var(--main-neon);">Ориентировочная стоимость</p><span id="totalPrice">35 000 ₽</span></div>
+        <div class="calc-options">
+            <label class="calc-btn opt-o" for="calc-odezhda">👕 Одежда и Мерч</label>
+            <label class="calc-btn opt-r" for="calc-reklama">🏢 Реклама</label>
+            <label class="calc-btn opt-p" for="calc-pos">📦 POS-материалы</label>
+        </div>
+        <div class="result-box">
+            <p style="font-size: 14px; color: #9ca3af; margin-bottom: 5px;">Ориентировочная стоимость за партию (100 шт):</p>
+            <span class="val val-o">35 000 ₽</span>
+            <span class="val val-r">15 000 ₽</span>
+            <span class="val val-p">25 000 ₽</span>
+        </div>
     </section>
     
     <section class="contacts-section" id="contacts">
@@ -203,20 +228,5 @@
     </section>
     
     <footer><p>© 2026 ТАНДЕМ. Иркутская область, рп. Марково.</p><p>Производство наружной рекламы, POS-материалов и мерча. Тел: 8 (950) 050-30-04</p></footer>
-    
-    <script>
-        function calculateTotal() {
-            const pricePerUnit = parseFloat(document.getElementById('category').value);
-            const quantity = parseInt(document.getElementById('quantity').value) || 0;
-            let total = pricePerUnit * quantity;
-            document.getElementById('totalPrice').innerText = Math.round(total).toLocaleString('ru-RU') + ' ₽';
-        }
-        calculateTotal();
-
-        function toggleCustomPanel() {
-            const panel = document.getElementById('custom-panel');
-            panel.style.display = (panel.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        function changeTheme(themeName) {if (themeName === 'matrix') document.body.classList.add('matrix-theme');if (themeName === 'purple') document.body.classList.add('purple-theme');}
-            document.body.className = '';
+</body>
+</html>
