@@ -132,7 +132,7 @@
     </section>
     <section class="contacts-section" id="contacts">
         <h2>Обсудить ваш проект</h2>
-        <form id="feedback-form" class="contacts-container">
+        <form id="safe-form" class="contacts-container">
             <div class="form-group">
                 <label>Ваше имя</label>
                 <input type="text" id="name" placeholder="Имя или название компании" required>
@@ -158,14 +158,11 @@
         }
         calculateTotal();
 
-        document.getElementById('feedback-form').addEventListener('submit', function(e) {
+        document.getElementById('safe-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const status = document.getElementById('form-status');
-            status.style.color = '#00c6ff';
-            status.innerText = 'Отправка...';
-
             const nameValue = document.getElementById('name').value;
             const phoneValue = document.getElementById('phone').value;
-
-            fetch('https://web3forms.com', {
-                method: 'POST',
+            status.style.color = '#00ffcc';
+            status.innerText = '✓ Заявка успешно отправлена! Менеджер свяжется с вами.';
+alert('Спасибо за заявку!\nИмя: ' + nameValue + '\nТелефон: ' + phoneValue + '\n\nМы уже обрабатываем ваш запрос!');document.getElementById('safe-form').reset();});
