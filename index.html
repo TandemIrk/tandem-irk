@@ -6,55 +6,63 @@
     <title>ТАНДЕМ | Производство рекламы и мерча Иркутск, Марково</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0d0e12; color: #f3f4f6; scroll-behavior: smooth; padding-top: 100px; }
-        header { display: flex; justify-content: space-between; padding: 20px 8%; align-items: center; background: #161822; position: fixed; width: 100%; top: 0; left: 0; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .logo { font-size: 24px; font-weight: 800; color: #fff; }
-        .logo span { color: #00c6ff; }
-        nav a { color: #9ca3af; text-decoration: none; margin: 0 15px; font-weight: 500; font-size: 15px; }
+        body { background-color: #0d0e12; color: #f3f4f6; scroll-behavior: smooth; padding-top: 100px; overflow-x: hidden; }
+        header { display: flex; justify-content: space-between; padding: 20px 8%; align-items: center; background: rgba(22, 24, 34, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; width: 100%; top: 0; left: 0; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 1px; }
+        .logo span { color: #00c6ff; text-shadow: 0 0 10px rgba(0, 198, 255, 0.6); }
+        nav a { color: #9ca3af; text-decoration: none; margin: 0 15px; font-weight: 500; font-size: 15px; transition: color 0.3s ease; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #00c6ff; transition: width 0.3s ease; }
         nav a:hover { color: #00c6ff; }
-        .phone-link { color: #fff; text-decoration: none; font-weight: bold; background: rgba(0, 198, 255, 0.1); padding: 10px 20px; border-radius: 20px; border: 1px solid rgba(0, 198, 255, 0.3); }
-        .hero { padding: 60px 8% 80px 8%; text-align: center; }
-        .hero .badge { background: rgba(0, 198, 255, 0.1); color: #00c6ff; padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 20px; display: inline-block; }
-        .hero h1 { font-size: 46px; margin-bottom: 20px; color: #fff; font-weight: 800; }
-        .hero h1 span { color: #00c6ff; }
-        .hero p { font-size: 18px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; }
-        .services { padding: 60px 8%; text-align: center; }
-        .services h2 { font-size: 32px; margin-bottom: 40px; color: #fff; }
-        .grid { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-        .card { background: #161822; padding: 30px; border-radius: 16px; width: 31%; text-align: left; border: 1px solid rgba(255,255,255,0.02); }
-        .card h3 { font-size: 20px; margin-bottom: 15px; color: #fff; }
-        .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 1.8; }
-        .card ul li::before { content: "✓ "; color: #00c6ff; margin-right: 5px; }
+        nav a:hover::after { width: 100%; }
+        .phone-link { color: #fff; text-decoration: none; font-weight: bold; background: rgba(0, 198, 255, 0.08); padding: 10px 20px; border-radius: 20px; border: 1px solid rgba(0, 198, 255, 0.25); transition: all 0.3s ease; }
+        .phone-link:hover { background: #00c6ff; color: #0d0e12; box-shadow: 0 0 20px rgba(0, 198, 255, 0.4); transform: translateY(-2px); }
+        .hero { padding: 80px 8% 100px 8%; text-align: center; }
+        .hero .badge { background: rgba(0, 198, 255, 0.1); color: #00c6ff; padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(0, 198, 255, 0.2); animation: pulseBadge 2.5s infinite; }
+        @keyframes pulseBadge { 0% { box-shadow: 0 0 0 0 rgba(0, 198, 255, 0.3); } 70% { box-shadow: 0 0 0 10px rgba(0, 198, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 198, 255, 0); } }
+        .hero h1 { font-size: 52px; margin-bottom: 25px; color: #fff; font-weight: 800; line-height: 1.25; }
+        .hero h1 span { color: #00c6ff; text-shadow: 0 0 20px rgba(0, 198, 255, 0.35); }
+        .hero p { font-size: 19px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6; }        .services { padding: 60px 8%; text-align: center; }
+        .services h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
+        .grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
+        .card { background: #161822; padding: 35px; border-radius: 18px; width: 31%; text-align: left; border: 1px solid rgba(255,255,255,0.02); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; cursor: pointer; }
+        .card:hover { transform: translateY(-8px) scale(1.02); background: #1c1f2f; border-color: rgba(0, 198, 255, 0.35); box-shadow: 0 20px 40px rgba(0, 198, 255, 0.1), 0 15px 30px rgba(0,0,0,0.5); }
+        .card h3 { font-size: 22px; margin-bottom: 20px; color: #fff; transition: all 0.3s ease; }
+        .card:hover h3 { color: #00c6ff; transform: translateX(5px); }
+        .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 2; }
+        .card ul li::before { content: "✓ "; color: #00c6ff; margin-right: 5px; font-weight: bold; }
         .portfolio { padding: 60px 8%; text-align: center; }
-        .portfolio h2 { font-size: 32px; margin-bottom: 40px; color: #fff; }
-        .portfolio-grid { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-        .portfolio-item { width: 31%; background: #161822; border-radius: 16px; padding: 25px; text-align: left; border: 1px solid rgba(255,255,255,0.02); }
-        .portfolio-item h4 { font-size: 18px; color: #00c6ff; margin-bottom: 10px; }
-        .portfolio-item p { font-size: 14px; color: #9ca3af; line-height: 1.5; }
-        .calc-section { background: #161822; padding: 40px; border-radius: 20px; max-width: 600px; margin: 50px auto; text-align: center; border: 1px solid rgba(255,255,255,0.02); }
-        .calc-section h2 { font-size: 28px; margin-bottom: 30px; color: #fff; }
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; margin-bottom: 8px; color: #9ca3af; }
-        .form-group select, .form-group input { width: 100%; padding: 12px; border: 1px solid rgba(255,255,255,0.1); background: #0d0e12; color: #fff; border-radius: 8px; font-size: 16px; }
-        .result-box { background: rgba(0, 198, 255, 0.08); padding: 20px; border-radius: 10px; margin-top: 20px; }
-        .result-box span { font-size: 28px; font-weight: bold; color: #fff; }
-        .contacts-section { padding: 60px 8%; text-align: center; background: #090a0d; }
-        .contacts-container { max-width: 500px; margin: 0 auto; text-align: center; background: #161822; padding: 40px 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.02); }
-        .contacts-section h2 { font-size: 32px; margin-bottom: 15px; color: #fff; }
-        .contacts-container p { color: #9ca3af; font-size: 16px; margin-bottom: 30px; line-height: 1.6; }
-        
+        .portfolio h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
+        .portfolio-grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
+        .portfolio-item { width: 31%; background: #161822; border-radius: 18px; padding: 30px; text-align: left; border: 1px solid rgba(255,255,255,0.02); transition: all 0.3s ease; }
+        .portfolio-item:hover { border-color: rgba(255,255,255,0.1); background: #1a1d2c; transform: scale(1.01); }
+        .portfolio-item h4 { font-size: 19px; color: #00c6ff; margin-bottom: 12px; }
+        .portfolio-item p { font-size: 14px; color: #9ca3af; line-height: 1.6; }
+        .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid rgba(0, 198, 255, 0.15); box-shadow: 0 25px 50px rgba(0,0,0,0.5); transition: all 0.3s ease; }
+        .calc-section:hover { border-color: rgba(0, 198, 255, 0.35); box-shadow: 0 25px 50px rgba(0, 198, 255, 0.05), 0 20px 40px rgba(0,0,0,0.6); }
+        .calc-section h2 { font-size: 32px; margin-bottom: 35px; color: #fff; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 10px; color: #9ca3af; font-weight: 500; }
+        .form-group select, .form-group input { width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,0.08); background: #0d0e12; color: #fff; border-radius: 10px; font-size: 16px; transition: all 0.3s ease; outline: none; }
+        .form-group select:focus, .form-group input:focus { border-color: #00c6ff; box-shadow: 0 0 12px rgba(0, 198, 255, 0.25); background: #11131a; }
+        .result-box { background: rgba(0, 198, 255, 0.04); padding: 25px; border-radius: 14px; margin-top: 25px; border: 1px dashed rgba(0, 198, 255, 0.2); }
+        .result-box span { font-size: 38px; font-weight: bold; color: #00c6ff; text-shadow: 0 0 15px rgba(0, 198, 255, 0.5); }
+        .contacts-section { padding: 80px 8%; text-align: center; background: #090a0d; }
+        .contacts-container { max-width: 550px; margin: 0 auto; text-align: center; background: #161822; padding: 45px 35px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .contacts-section h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
+        .contacts-container p { color: #9ca3af; font-size: 16px; margin-bottom: 35px; line-height: 1.7; }
         .btn-box { display: flex; flex-direction: column; gap: 15px; }
-        .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 16px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; }
-        .btn-submit:hover { background: #00aed4; }
+        .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+        .btn-primary { animation: pulseBtn 2s infinite; }
+        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.015); box-shadow: 0 0 20px rgba(0, 198, 255, 0.4); } 100% { transform: scale(1); } }
+        .btn-primary:hover { background: #00aed4; animation: none; transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(0, 198, 255, 0.4); }
         .btn-secondary { background: transparent; color: #00c6ff; border: 2px solid #00c6ff; }
-        .btn-secondary:hover { background: rgba(0, 198, 255, 0.1); }
-        
-        footer { padding: 30px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); }
+        .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 198, 255, 0.15); }
+        footer { padding: 40px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.8; }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo"><span>ТАНДЕМ</span></div>
+        <div class="logo">ТАНДЕМ</div>
         <nav>
             <a href="#services">Услуги</a>
             <a href="#portfolio">Работы</a>
@@ -141,7 +149,7 @@
         <div class="contacts-container">
             <p>Свяжитесь с нами удобным для вас способом. Вы можете позвонить напрямую по телефону или скопировать адрес нашей электронной почты для отправки технического задания.</p>
             <div class="btn-box">
-                <a href="tel:+79500503004" class="btn-submit">Позвонить по телефону</a>
+                <a href="tel:+79500503004" class="btn-submit btn-primary">Позвонить по телефону</a>
                 <a href="mailto:Tandem38-irk@yandex.ru?subject=Заказ расчета проекта ТАНДЕМ" class="btn-submit btn-secondary">Написать на почту: Tandem38-irk@yandex.ru</a>
             </div>
         </div>
@@ -161,3 +169,4 @@
     </script>
 </body>
 </html>
+
