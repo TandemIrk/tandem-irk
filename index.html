@@ -24,8 +24,7 @@
         .card { background: #161822; padding: 30px; border-radius: 16px; width: 31%; text-align: left; border: 1px solid rgba(255,255,255,0.02); }
         .card h3 { font-size: 20px; margin-bottom: 15px; color: #fff; }
         .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 1.8; }
-        .card ul li::before { content: "✓ "; color: #00c6ff; margin-right: 5px; }
-        .portfolio { padding: 60px 8%; text-align: center; }
+        .card ul li::before { content: "✓ "; color: #00c6ff; margin-right: 5px; }        .portfolio { padding: 60px 8%; text-align: center; }
         .portfolio h2 { font-size: 32px; margin-bottom: 40px; color: #fff; }
         .portfolio-grid { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
         .portfolio-item { width: 31%; background: #161822; border-radius: 16px; padding: 25px; text-align: left; border: 1px solid rgba(255,255,255,0.02); }
@@ -42,12 +41,13 @@
         .contacts-container { max-width: 500px; margin: 0 auto; text-align: left; background: #161822; padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.02); }
         .contacts-section h2 { font-size: 32px; margin-bottom: 30px; color: #fff; }
         .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 15px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
+        #form-result { margin-top: 15px; text-align: center; font-size: 16px; font-weight: bold; }
         footer { padding: 30px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">ООО <span>ТАНДЕМ</span></div>
+        <div class="logo">ООО <span>ТАНDЕМ</span></div>
         <nav>
             <a href="#services">Услуги</a>
             <a href="#portfolio">Работы</a>
@@ -131,21 +131,17 @@
     </section>
     <section class="contacts-section" id="contacts">
         <h2>Обсудить ваш проект</h2>
-        <!-- ЖЕЛЕЗОБЕТОННАЯ ПРЯМАЯ ОТПРАВКА БЕЗ СКРИПТОВ -->
-        <form action="https://web3forms.com" method="POST" class="contacts-container">
-            <input type="hidden" name="access_key" value="c48d9a3b-fa42-4c4f-8a75-abd885fc2947">
-            <input type="hidden" name="subject" value="Новая заявка с сайта ТАНДЕМ">
-            <input type="hidden" name="from_name" value="Сайт ООО ТАНДЕМ">
-
+        <form id="telegram-form" class="contacts-container">
             <div class="form-group">
                 <label>Ваше имя</label>
-                <input type="text" name="name" placeholder="Имя или название компании" required>
+                <input type="text" id="client-name" placeholder="Имя или название компании" required>
             </div>
             <div class="form-group">
                 <label>Контактный телефон</label>
-                <input type="text" name="phone" placeholder="+7 (950) 050-30-04" required>
+                <input type="text" id="client-phone" placeholder="+7 (950) 050-30-04" required>
             </div>
             <button type="submit" class="btn-submit">Отправить заявку</button>
+            <div id="form-result"></div>
         </form>
     </section>
     <footer>
@@ -160,6 +156,42 @@
             document.getElementById('totalPrice').innerText = Math.round(total).toLocaleString('ru-RU') + ' ₽';
         }
         calculateTotal();
+
+        document.getElementById('telegram-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('form-result');
+            resultDiv.style.color = '#00c6ff';
+            resultDiv.innerText = 'Отправка заявки...';
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+
+            fetch('https://web3forms.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    access_key: 'c48d9a3b-fa42-4c4f-8a75-abd885fc2947',
+                    subject: '🔥 ЗАЯВКА ООО ТАНДЕМ',
+                    name: name,
+                    phone: phone
+                })
+            })
+            .then(async (response) => {
+                if (response.status == 200) {
+                    resultDiv.style.color = '#00ffcc';
+                    resultDiv.innerText = '✓ Заявка успешно отправлена! Менеджер свяжется с вами.';
+                    alert('Спасибо за заявку! \n\nДанные получены. Мы свяжемся с вами в ближайшее время.');
+                    document.getElementById('telegram-form').reset();
+                } else {
+                    resultDiv.style.color = '#ff3366';
+                    resultDiv.innerText = 'Ошибка отправки. Попробуйте еще раз.';
+                }
+            })
+            .catch(error => {
+                resultDiv.style.color = '#ff3366';
+                resultDiv.innerText = 'Ошибка сети. Проверьте интернет.';
+            });
+        });
     </script>
 </body>
 </html>
+
