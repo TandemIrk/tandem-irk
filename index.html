@@ -15,70 +15,69 @@
         nav a:hover::after { width: 100%; }
         .phone-link { color: #fff; text-decoration: none; font-weight: bold; background: rgba(0, 198, 255, 0.08); padding: 10px 20px; border-radius: 20px; border: 1px solid rgba(0, 198, 255, 0.25); transition: all 0.3s ease; }
         .phone-link:hover { background: #00c6ff; color: #0d0e12; box-shadow: 0 0 20px rgba(0, 198, 255, 0.4); transform: translateY(-2px); }
-        .hero { padding: 80px 8% 100px 8%; text-align: center; }
+        .hero { 
+            padding: 120px 8% 140px 8%; text-align: center; position: relative;
+            background: linear-gradient(rgba(13, 14, 18, 0.88), rgba(13, 14, 18, 0.95)), url('https://unsplash.com') no-repeat center/cover;
+            background-attachment: fixed;
+        }
         .hero .badge { background: rgba(0, 198, 255, 0.1); color: #00c6ff; padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(0, 198, 255, 0.2); animation: pulseBadge 2.5s infinite; }
         @keyframes pulseBadge { 0% { box-shadow: 0 0 0 0 rgba(0, 198, 255, 0.3); } 70% { box-shadow: 0 0 0 10px rgba(0, 198, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 198, 255, 0); } }
         .hero h1 { font-size: 52px; margin-bottom: 25px; color: #fff; font-weight: 800; line-height: 1.25; }
         .hero h1 span { color: #00c6ff; text-shadow: 0 0 20px rgba(0, 198, 255, 0.35); }
-        .hero p { font-size: 19px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6; }        /* Новые стили для раскрывающихся карточек */
+        .hero p { font-size: 19px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6; }
         .services { padding: 60px 8%; text-align: center; }
         .services h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
         .services-sub { color: #9ca3af; font-size: 16px; margin-bottom: 40px; }
         .grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
-        
         .card-label { width: 31%; cursor: pointer; display: block; text-align: left; }
-        .card-input { display: none; } /* Прячем стандартный чекбокс */
-        
+        .card-input { display: none; }
         .card { background: #161822; padding: 35px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.02); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; height: 100%; }
-        .card:hover { transform: translateY(-5px); background: #1c1f2f; border-color: rgba(0, 198, 255, 0.35); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-        .card h3 { font-size: 22px; margin-bottom: 15px; color: #fff; transition: all 0.3s ease; }
-        .card:hover h3 { color: #00c6ff; }
+        .card:hover { transform: translateY(-8px) scale(1.02); background: #1c1f2f; border-color: rgba(0, 198, 255, 0.35); box-shadow: 0 20px 40px rgba(0, 198, 255, 0.1), 0 15px 30px rgba(0,0,0,0.5); }
+        .card h3 { font-size: 22px; margin-bottom: 20px; color: #fff; transition: color 0.3s ease, transform 0.3s ease; }
+        .card:hover h3 { color: #00c6ff; transform: translateX(5px); }
         .card .hint { font-size: 13px; color: #00c6ff; margin-bottom: 15px; opacity: 0.7; font-weight: 500; }
-        .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 2; margin-bottom: 15px; }
+        .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 2; }
         .card ul li::before { content: "✓ "; color: #00c6ff; margin-right: 5px; font-weight: bold; }
-        
-        /* Скрытое подробное описание */
         .card-details { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0, 198, 255, 0.03); border-radius: 10px; padding: 0 15px; border: 0 solid rgba(0, 198, 255, 0.15); }
         .card-details p { font-size: 14px; color: #e5e7eb; line-height: 1.6; padding: 15px 0; }
-        
-        /* Магия CSS: при клике карточка раскрывается */
         .card-input:checked + .card { background: #1c1f2f; border-color: #00c6ff; box-shadow: 0 0 25px rgba(0, 198, 255, 0.15); }
-        .card-input:checked + .card .card-details { max-height: 300px; opacity: 1; padding: 5px 15px; border-width: 1px; margin-top: 15px; }
-        .card-input:checked + .card .hint { color: #00ffcc; font-weight: bold; }
+        .card-input:checked + .card .card-details { max-height: 300px; opacity: 1; padding: 5px 15px; margin-top: 15px; border: 1px solid rgba(0, 198, 255, 0.15); }
         .portfolio { padding: 60px 8%; text-align: center; }
         .portfolio h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
         .portfolio-grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
         .portfolio-item { width: 31%; background: #161822; border-radius: 18px; padding: 30px; text-align: left; border: 1px solid rgba(255,255,255,0.02); transition: all 0.3s ease; }
         .portfolio-item:hover { border-color: rgba(255,255,255,0.1); background: #1a1d2c; transform: scale(1.01); }
         .portfolio-item h4 { font-size: 19px; color: #00c6ff; margin-bottom: 12px; }
-        .portfolio-item p { font-size: 14px; color: #9ca3af; line-height: 1.6; }
-        .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid rgba(0, 198, 255, 0.15); box-shadow: 0 25px 50px rgba(0,0,0,0.5); transition: all 0.3s ease; }
+        .portfolio-item p { font-size: 14px; color: #9ca3af; line-height: 1.6; }        .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid rgba(0, 198, 255, 0.12); box-shadow: 0 25px 50px rgba(0,0,0,0.5); transition: border-color 0.3s ease; }
+        .calc-section:hover { border-color: rgba(0, 198, 255, 0.25); }
         .calc-section h2 { font-size: 32px; margin-bottom: 35px; color: #fff; }
         .form-group { margin-bottom: 25px; text-align: left; }
         .form-group label { display: block; margin-bottom: 10px; color: #9ca3af; font-weight: 500; }
         .form-group select, .form-group input { width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,0.08); background: #0d0e12; color: #fff; border-radius: 10px; font-size: 16px; transition: all 0.3s ease; outline: none; }
+        .form-group select:focus, .form-group input:focus { border-color: #00c6ff; box-shadow: 0 0 12px rgba(0, 198, 255, 0.25); background: #11131a; }
         .result-box { background: rgba(0, 198, 255, 0.04); padding: 25px; border-radius: 14px; margin-top: 25px; border: 1px dashed rgba(0, 198, 255, 0.2); }
         .result-box span { font-size: 38px; font-weight: bold; color: #00c6ff; text-shadow: 0 0 15px rgba(0, 198, 255, 0.5); }
         .contacts-section { padding: 80px 8%; text-align: center; background: #090a0d; }
         .contacts-container { max-width: 550px; margin: 0 auto; text-align: center; background: #161822; padding: 45px 35px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        ..btn-box { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+        .contacts-section h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
+        .contacts-container p { color: #9ca3af; font-size: 16px; line-height: 1.7; }
+        .btn-box { display: flex !important; flex-direction: column !important; gap: 15px !important; margin-top: 45px !important; }
+        .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
         .btn-primary { animation: pulseBtn 2s infinite; }
         @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.015); box-shadow: 0 0 20px rgba(0, 198, 255, 0.4); } 100% { transform: scale(1); } }
+        .btn-primary:hover { background: #00aed4; animation: none; transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(0, 198, 255, 0.4); }
         .btn-secondary { background: transparent; color: #00c6ff; border: 2px solid #00c6ff; }
-        .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; transform: translateY(-3px); }
+        .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 198, 255, 0.15); }
+        .delivery-badge { background: rgba(0, 198, 255, 0.03); border: 1px solid rgba(0, 198, 255, 0.2); padding: 25px; border-radius: 16px; margin-top: 35px; text-align: left; }
+        .delivery-badge h4 { color: #00ffcc; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+        .delivery-badge ul { list-style: none; color: #e5e7eb; font-size: 14px; line-height: 1.8; }
         footer { padding: 40px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.8; }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">ТАНДЕМ</div>
-        <nav>
-            <a href="#services">Услуги</a>
-            <a href="#portfolio">Работы</a>
-            <a href="#calc">Калькулятор</a>
-            <a href="#contacts">Контакты</a>
-        </nav>
+        <nav><a href="#services">Услуги</a><a href="#portfolio">Работы</a><a href="#calc">Калькулятор</a><a href="#contacts">Контакты</a></nav>
         <a href="tel:+79500503004" class="phone-link">8 (950) 050-30-04</a>
     </header>
     <section class="hero">
@@ -86,12 +85,10 @@
         <h1>Нанесение логотипов, наружная реклама <br><span>и POS-материалы от ТАНДЕМ</span></h1>
         <p>Собственная производственная база. Брендируем текстиль, изготавливаем рекламные вывески и конструкции любой сложности для бизнеса в Иркутской области.</p>
     </section>
-    
     <section class="services" id="services">
         <h2>Наши производственные возможности</h2>
         <p class="services-sub">Нажмите на любую карточку, чтобы узнать подробности услуги</p>
         <div class="grid">
-            <!-- КАРТОЧКА 1 -->
             <label class="card-label" for="serve-1">
                 <input type="checkbox" id="serve-1" class="card-input">
                 <div class="card">
@@ -106,8 +103,6 @@
                     </div>
                 </div>
             </label>
-            
-            <!-- КАРТОЧКА 2 -->
             <label class="card-label" for="serve-2">
                 <input type="checkbox" id="serve-2" class="card-input">
                 <div class="card">
@@ -122,8 +117,6 @@
                     </div>
                 </div>
             </label>
-            
-            <!-- КАРТОЧКА 3 -->
             <label class="card-label" for="serve-3">
                 <input type="checkbox" id="serve-3" class="card-input">
                 <div class="card">
@@ -140,57 +133,36 @@
             </label>
         </div>
     </section>
-    
     <section class="portfolio" id="portfolio">
         <h2>Примеры готовой продукции</h2>
         <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <h4>01. Брендирование текстиля</h4>
-                <p>Нанесение износостойких логотипов на элементы промо-формы, спецодежду, худи и кепки для компаний.</p>
-            </div>
-            <div class="portfolio-item">
-                <h4>02. Наружные конструкции</h4>
-                <p>Проектирование и изготовление ярких вывесок, объемных световых букв и рекламных коробов.</p>
-            </div>
-            <div class="portfolio-item">
-                <h4>03. Оформление зон продаж</h4>
-                <p>Изготовление POS-материалов, ростовых фигур и промо-стоек для привлечения внимания к товару.</p>
-            </div>
+            <div class="portfolio-item"><h4>01. Брендирование текстиля</h4><p>Нанесение износостойких логотипов на элементы промо-формы, спецодежду, худи и кепки для компаний.</p></div>
+            <div class="portfolio-item"><h4>02. Наружные конструкции</h4><p>Проектирование и изготовление ярких вывесок, объемных световых букв и рекламных коробов.</p></div>
+            <div class="portfolio-item"><h4>03. Оформление зон продаж</h4><p>Изготовление POS-материалов, ростовых фигур и промо-стоек для привлечения внимания к товару.</p></div>
         </div>
     </section>
     <section class="calc-section" id="calc">
         <h2>Быстрый онлайн-расчет заказа</h2>
-        <div class="form-group">
-            <label for="category">Выберите направление:</label>
-            <select id="category" onchange="calculateTotal()">
-                <option value="350">Нанесение на одежду (350 ₽/шт)</option>
-                <option value="15000">Наружная реклама (базовый заказ от 15 000 ₽)</option>
-                <option value="250">POS-материалы (мелкий опт от 250 ₽/шт)</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="quantity">Укажите планируемый тираж / объём:</label>
-            <input type="number" id="quantity" value="100" min="1" oninput="calculateTotal()">
-        </div>
-        <div class="result-box">
-            <p style="font-size: 14px; color: #00c6ff; margin-bottom: 5px;">Ориентировочная стоимость</p>
-            <span id="totalPrice">35 000 ₽</span>
-        </div>
+        <div class="form-group"><label for="category">Выберите направление:</label><select id="category" onchange="calculateTotal()"><option value="350">Нанесение на одежду (350 ₽/шт)</option><option value="15000">Наружная реклама (базовый заказ от 15 000 ₽)</option><option value="250">POS-материалы (мелкий опт от 250 ₽/шт)</option></select></div>
+        <div class="form-group"><label for="quantity">Укажите планируемый тираж / объём:</label><input type="number" id="quantity" value="100" min="1" oninput="calculateTotal()"></div>
+        <div class="result-box"><p style="font-size: 14px; color: #00c6ff; margin-bottom: 5px;">Ориентировочная стоимость</p><span id="totalPrice">35 000 ₽</span></div>
     </section>
     <section class="contacts-section" id="contacts">
         <h2>Обсудить ваш проект</h2>
         <div class="contacts-container">
             <p>Свяжитесь с нами удобным для вас способом. Вы можете позвонить напрямую по телефону или скопировать адрес нашей электронной почты для отправки технического задания.</p>
-            <div class="btn-box">
-                <a href="tel:+79500503004" class="btn-submit btn-primary">Позвонить по телефону</a>
-                <a href="mailto:Tandem38-irk@yandex.ru?subject=Заказ расчета проекта ТАНДЕМ" class="btn-submit btn-secondary">Написать на почту: Tandem38-irk@yandex.ru</a>
+            <div class="btn-box"><a href="tel:+79500503004" class="btn-submit btn-primary">Позвонить по телефону</a><a href="mailto:Tandem38-irk@yandex.ru?subject=Заказ расчета проекта ТАНДЕМ" class="btn-submit btn-secondary">Написать на почту: Tandem38-irk@yandex.ru</a></div>
+            <div class="delivery-badge">
+                <h4>💼 Условия сотрудничества</h4>
+                <ul style="list-style: none;">
+                    <li>🚙 <b>Бесплатная доставка</b> готовой продукции по Иркутску и всей области</li>
+                    <li>📄 <b>Официальный договор</b>, безналичный расчет и полный пакет закрывающих документов</li>
+                    <li>🏭 <b>Собственная производственная база</b> в рп. Марково — работа напрямую без посредников</li>
+                </ul>
             </div>
         </div>
     </section>
-    <footer>
-        <p>© 2026 ТАНДЕМ. Иркутская область, рп. Марково.</p>
-        <p>Производство наружной рекламы, POS-материалов и мерча. Тел: 8 (950) 050-30-04</p>
-    </footer>
+    <footer><p>© 2026 ТАНДЕМ. Иркутская область, рп. Марково.</p><p>Производство наружной рекламы, POS-материалов и мерча. Тел: 8 (950) 050-30-04</p></footer>
     <script>
         function calculateTotal() {
             const pricePerUnit = parseFloat(document.getElementById('category').value);
