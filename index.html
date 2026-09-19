@@ -143,14 +143,15 @@
 
     <section class="contacts-section" id="contacts">
         <h2>Обсудить ваш проект</h2>
+        <!-- Кастомная чистая форма без CORS-блокировок -->
         <form action="https://formspree.io" method="POST" class="contacts-container">
             <div class="form-group">
                 <label>Ваше имя</label>
-                <input type="text" name="name" placeholder="Имя или название компании" required>
+                <input type="text" name="Имя_клиента" placeholder="Имя или название компании" required>
             </div>
             <div class="form-group">
                 <label>Контактный телефон</label>
-                <input type="text" name="phone" placeholder="+7 (950) 050-30-04" required>
+                <input type="text" name="Телефон_клиента" placeholder="+7 (950) 050-30-04" required>
             </div>
             <button type="submit" style="width: 100%; background: #00c6ff; color: #0d0e12; padding: 15px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px;">Отправить заявку</button>
         </form>
