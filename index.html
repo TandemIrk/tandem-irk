@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ТАНДЕМ | Производство рекламы и мерча Иркутск, Markovo</title>
+    <title>ТАНДЕМ | Производство рекламы и мерча Иркутск, Марково</title>
     <style>
         /* Базовые переменные цвета для кастомизации интерфейса */
         :root { --main-neon: #00c6ff; --neon-shadow: rgba(0, 198, 255, 0.6); }
@@ -13,14 +13,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #0d0e12; color: #f3f4f6; scroll-behavior: smooth; padding-top: 100px; overflow-x: hidden; transition: background 0.3s; }
         
-        /* Шапка с размытием заднего плана */
         header { display: flex; justify-content: space-between; padding: 20px 8%; align-items: center; background: rgba(22, 24, 34, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; width: 100%; top: 0; left: 0; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        
-        /* Секретный кликабельный логотип для пасхалки */
         .logo { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 1px; cursor: pointer; user-select: none; }
         .logo span { color: var(--main-neon); text-shadow: 0 0 10px var(--neon-shadow); transition: all 0.3s; }
         
-        /* Скрытая панель кастомизации (Пасхалка) */
         #custom-panel { display: none; background: #161822; padding: 10px 20px; border-radius: 30px; border: 1px solid var(--main-neon); position: fixed; top: 90px; left: 8%; z-index: 9998; gap: 10px; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .color-dot { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid #fff; }
 
@@ -30,22 +26,21 @@
         nav a:hover::after { width: 100%; }
         
         .phone-link { color: #fff; text-decoration: none; font-weight: bold; background: rgba(0, 198, 255, 0.08); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--main-neon); transition: all 0.3s ease; }
-        .phone-link:hover { background: var(--main-neon); color: #0d0e12; box-shadow: 0 0 20px var(--neon-shadow); transform: translateY(-2px); }
-        /* Эффект параллакса с красивым фото швейного цеха/производства */
+        .phone-link:hover { background: var(--main-neon); color: #0d0e12; box-shadow: 0 0 20px var(--neon-shadow); transform: translateY(-2px); }        /* ТВОЙ НОВЫЙ ФОН ИЗ ШЕДЕВРУМА С ЗАМЫТИЕМ И ПРИТЕМНЕНИЕМ */
         .hero { 
             padding: 120px 8% 140px 8%; 
             text-align: center; 
             position: relative;
-            background: linear-gradient(rgba(13, 14, 18, 0.85), rgba(13, 14, 18, 0.95)), 
-                        url('https://unsplash.com') no-repeat center/cover;
+            background: linear-gradient(rgba(13, 14, 18, 0.82), rgba(13, 14, 18, 0.92)), 
+                        url('fabric.jpg') no-repeat center/cover;
             background-attachment: fixed;
+            backdrop-filter: blur(4px); /* Автоматическое красивое размытие фона */
         }
         .hero .badge { background: rgba(0, 198, 255, 0.1); color: var(--main-neon); padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 25px; display: inline-block; border: 1px solid var(--main-neon); }
         .hero h1 { font-size: 52px; margin-bottom: 25px; color: #fff; font-weight: 800; line-height: 1.25; }
         .hero h1 span { color: var(--main-neon); text-shadow: 0 0 20px var(--neon-shadow); }
         .hero p { font-size: 19px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6; }
         
-        /* Стили раскрывающихся подробных списков услуг */
         .services { padding: 60px 8%; text-align: center; }
         .services h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
         .services-sub { color: #9ca3af; font-size: 16px; margin-bottom: 40px; }
@@ -63,6 +58,7 @@
         .card-details p { font-size: 14px; color: #e5e7eb; line-height: 1.6; padding: 15px 0; }
         .card-input:checked + .card { background: #1c1f2f; border-color: var(--main-neon); box-shadow: 0 0 25px rgba(0, 198, 255, 0.15); }
         .card-input:checked + .card .card-details { max-height: 350px; opacity: 1; padding: 5px 15px; margin-top: 15px; border: 1px solid rgba(0, 198, 255, 0.15); }
+        
         .portfolio { padding: 60px 8%; text-align: center; }
         .portfolio h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
         .portfolio-grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
@@ -80,18 +76,15 @@
         .form-group select:focus, .form-group input:focus { border-color: var(--main-neon); box-shadow: 0 0 12px rgba(0, 198, 255, 0.25); background: #11131a; }
         .result-box { background: rgba(0, 198, 255, 0.04); padding: 25px; border-radius: 14px; margin-top: 25px; border: 1px dashed rgba(0, 198, 255, 0.2); }
         .result-box span { font-size: 38px; font-weight: bold; color: var(--main-neon); text-shadow: 0 0 15px var(--neon-shadow); }
-        
         .contacts-section { padding: 80px 8%; text-align: center; background: #090a0d; }
         .contacts-container { max-width: 550px; margin: 0 auto; text-align: center; background: #161822; padding: 45px 35px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         .contacts-section h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
         .contacts-container p { color: #9ca3af; font-size: 16px; line-height: 1.7; }
         
-        /* ЖЕЛЕЗОБЕТОННЫЙ ФИКС — КНОПКИ ГАРАНТИРОВАННО ОТЛЕПИЛИСЬ ОТ ТЕКСТА */
         .btn-box { display: flex !important; flex-direction: column !important; gap: 15px !important; margin-top: 45px !important; }
         .btn-submit { width: 100%; background: var(--main-neon); color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
         .btn-primary { animation: pulseBtn 2s infinite; }
         @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.015); box-shadow: 0 0 20px var(--neon-shadow); } 100% { transform: scale(1); } }
-        .btn-primary:hover { background: #00aed4; animation: none; transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px var(--neon-shadow); }
         .btn-secondary { background: transparent; color: var(--main-neon); border: 2px solid var(--main-neon); }
         .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 198, 255, 0.15); }
         
@@ -115,7 +108,6 @@
         <a href="tel:+79500503004" class="phone-link">8 (950) 050-30-04</a>
     </header>
 
-    <!-- Скрытая хакерская панель перекраски сайта -->
     <div id="custom-panel">
         <span style="font-size: 12px; color: #9ca3af; font-weight: bold; text-transform: uppercase;">Стиль:</span>
         <div class="color-dot" style="background: #00c6ff;" onclick="changeTheme('cyan')"></div>
@@ -177,6 +169,7 @@
             </label>
         </div>
     </section>
+    
     <section class="portfolio" id="portfolio">
         <h2>Примеры готовой продукции</h2>
         <div class="portfolio-grid">
@@ -220,18 +213,10 @@
         }
         calculateTotal();
 
-        // Полноценный скрипт выкатывания панели кастомизации
         function toggleCustomPanel() {
             const panel = document.getElementById('custom-panel');
             panel.style.display = (panel.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        // Полноценный скрипт переключения RGB пресетов
-        function changeTheme(themeName) {
-            document.body.className = ''; // Полный сброс старых классов
-            if (themeName === 'matrix') document.body.classList.add('matrix-theme');
-            if (themeName === 'purple') document.body.classList.add('purple-theme');
-        }
-    </script>
-</body>
-</html>
+        function changeTheme(themeName) {if (themeName === 'matrix') document.body.classList.add('matrix-theme');if (themeName === 'purple') document.body.classList.add('purple-theme');}
+            document.body.className = '';
