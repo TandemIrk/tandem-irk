@@ -42,7 +42,6 @@
         .contacts-container { max-width: 500px; margin: 0 auto; text-align: left; background: #161822; padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.02); }
         .contacts-section h2 { font-size: 32px; margin-bottom: 30px; color: #fff; }
         .btn-submit { width: 100%; background: #00c6ff; color: #0d0e12; padding: 15px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
-        #form-status { margin-top: 15px; text-align: center; font-size: 16px; font-weight: bold; }
         footer { padding: 30px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
@@ -132,17 +131,21 @@
     </section>
     <section class="contacts-section" id="contacts">
         <h2>Обсудить ваш проект</h2>
-        <form id="safe-form" class="contacts-container">
+        <!-- ЖЕЛЕЗОБЕТОННАЯ ПРЯМАЯ ОТПРАВКА БЕЗ СКРИПТОВ -->
+        <form action="https://web3forms.com" method="POST" class="contacts-container">
+            <input type="hidden" name="access_key" value="c48d9a3b-fa42-4c4f-8a75-abd885fc2947">
+            <input type="hidden" name="subject" value="Новая заявка с сайта ТАНДЕМ">
+            <input type="hidden" name="from_name" value="Сайт ООО ТАНДЕМ">
+
             <div class="form-group">
                 <label>Ваше имя</label>
-                <input type="text" id="name" placeholder="Имя или название компании" required>
+                <input type="text" name="name" placeholder="Имя или название компании" required>
             </div>
             <div class="form-group">
                 <label>Контактный телефон</label>
-                <input type="text" id="phone" placeholder="+7 (950) 050-30-04" required>
+                <input type="text" name="phone" placeholder="+7 (950) 050-30-04" required>
             </div>
             <button type="submit" class="btn-submit">Отправить заявку</button>
-            <div id="form-status"></div>
         </form>
     </section>
     <footer>
@@ -157,12 +160,6 @@
             document.getElementById('totalPrice').innerText = Math.round(total).toLocaleString('ru-RU') + ' ₽';
         }
         calculateTotal();
-
-        document.getElementById('safe-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const status = document.getElementById('form-status');
-            const nameValue = document.getElementById('name').value;
-            const phoneValue = document.getElementById('phone').value;
-            status.style.color = '#00ffcc';
-            status.innerText = '✓ Заявка успешно отправлена! Менеджер свяжется с вами.';
-alert('Спасибо за заявку!\nИмя: ' + nameValue + '\nТелефон: ' + phoneValue + '\n\nМы уже обрабатываем ваш запрос!');document.getElementById('safe-form').reset();});
+    </script>
+</body>
+</html>
