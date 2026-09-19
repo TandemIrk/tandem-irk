@@ -5,44 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ТАНДЕМ | Производство рекламы и мерча Иркутск, Марково</title>
     <style>
-        /* Базовые цвета для кастомизации сайта БЕЗ СКРИПТОВ */
-        :root { --main-neon: #00c6ff; --neon-shadow: rgba(0, 198, 255, 0.6); }
-        #theme-matrix:checked ~ * { --main-neon: #00ff66; --neon-shadow: rgba(0, 255, 102, 0.6); }
-        #theme-purple:checked ~ * { --main-neon: #cc00ff; --neon-shadow: rgba(204, 0, 255, 0.6); }
-        #theme-cyan:checked ~ * { --main-neon: #00c6ff; --neon-shadow: rgba(0, 198, 255, 0.6); }
+        /* CSS-переменные для кастомизации цвета и неона на лету */
+        :root { --neon: #00c6ff; --sh: rgba(0, 198, 255, 0.5); --pulse: none; }
+        
+        #hz-80:checked ~ * { --neon: #00ff66; --sh: rgba(0, 255, 102, 0.5); }
+        #hz-8080:checked ~ * { --neon: #cc00ff; --sh: rgba(204, 0, 255, 0.5); }
+        #xray-on:checked ~ * { --pulse: neonGlow 2s infinite alternate; --sh: rgba(0, 255, 204, 0.8); }
+
+        @keyframes neonGlow {
+            0% { box-shadow: 0 0 10px var(--sh); border-color: rgba(255,255,255,0.05); }
+            100% { box-shadow: 0 0 25px var(--sh); border-color: var(--neon); }
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #0d0e12; color: #f3f4f6; scroll-behavior: smooth; padding-top: 100px; overflow-x: hidden; }
         
         header { display: flex; justify-content: space-between; padding: 20px 8%; align-items: center; background: rgba(22, 24, 34, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; width: 100%; top: 0; left: 0; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.06); }
         
+        /* Секретный кликабельный логотип ТАНДЕМ */
         .logo-btn { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 1px; cursor: pointer; user-select: none; }
-        .logo-btn span { color: var(--main-neon); text-shadow: 0 0 10px var(--neon-shadow); transition: all 0.3s; }
+        .logo-btn span { color: var(--neon); text-shadow: 0 0 10px var(--sh); transition: all 0.3s; }
+        /* Стили выплывающей хакерской панели */
+        #dev-panel { display: none; position: fixed; top: 90px; left: 8%; width: 320px; background: #11121a; border: 2px dashed var(--neon); border-radius: 12px; padding: 20px; z-index: 9998; box-shadow: 0 15px 40px rgba(0,0,0,0.8); font-family: monospace; }
+        #toggle-panel:checked ~ #dev-panel { display: block; }
         
-        /* Скрытая панель кастомизации на чистом CSS */
-        #custom-panel { display: none; background: #161822; padding: 10px 20px; border-radius: 30px; border: 1px solid var(--main-neon); position: fixed; top: 90px; left: 8%; z-index: 9998; gap: 10px; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        #toggle-panel:checked ~ #custom-panel { display: flex; }
-        .color-dot { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid #fff; }
+        .dev-title { color: #fff; font-size: 14px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        .dev-group { margin-bottom: 15px; }
+        .dev-label { color: #888; font-size: 11px; display: block; margin-bottom: 8px; }
+        
+        .freq-selector { display: flex; gap: 8px; }
+        .freq-btn { flex: 1; text-align: center; background: #161822; border: 1px solid rgba(255,255,255,0.1); padding: 6px; border-radius: 4px; color: #fff; font-size: 11px; cursor: pointer; }
+        
+        #hz-443:checked ~ #dev-panel .f-443 { background: var(--neon); color: #0d0e12; box-shadow: 0 0 10px var(--sh); font-weight: bold; }
+        #hz-80:checked ~ #dev-panel .f-80 { background: var(--neon); color: #0d0e12; box-shadow: 0 0 10px var(--sh); font-weight: bold; }
+        #hz-8080:checked ~ #dev-panel .f-8080 { background: var(--neon); color: #0d0e12; box-shadow: 0 0 10px var(--sh); font-weight: bold; }
+        
+        .toggle-row { display: flex; justify-content: space-between; align-items: center; background: #161822; padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.02); }
+        .toggle-name { color: #fff; font-size: 12px; }
+        .toggle-btn { background: #0d0e12; border: 1px solid rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px; color: #666; font-size: 10px; cursor: pointer; }
+        #xray-on:checked ~ #dev-panel .ad-on { background: #00ffcc; color: #0d0e12; font-weight: bold; box-shadow: 0 0 10px var(--sh); }
 
-        nav a { color: #9ca3af; text-decoration: none; margin: 0 15px; font-weight: 500; font-size: 15px; transition: color 0.3s ease; position: relative; }
-        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--main-neon); transition: width 0.3s ease; }
-        nav a:hover { color: var(--main-neon); }
+        nav a { color: #9ca3af; text-decoration: none; margin: 0 15px; font-weight: 500; font-size: 15px; transition: color 0.3s; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--neon); transition: width 0.3s; }
+        nav a:hover { color: var(--neon); }
         nav a:hover::after { width: 100%; }
-        
-        .phone-link { color: #fff; text-decoration: none; font-weight: bold; background: rgba(0, 198, 255, 0.08); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--main-neon); transition: all 0.3s ease; }
-        .phone-link:hover { background: var(--main-neon); color: #0d0e12; box-shadow: 0 0 20px var(--neon-shadow); transform: translateY(-2px); }
-        /* Твой сочный замыленный фон из Шедеврума */
-        .hero { 
-            padding: 120px 8% 140px 8%; 
-            text-align: center; 
-            position: relative;
-            background: linear-gradient(rgba(13, 14, 18, 0.85), rgba(13, 14, 18, 0.95)), 
-                        url('fabric.jpg') no-repeat center/cover;
-            background-attachment: fixed; /* Эффект параллакса глубокого скролла */
-        }
-        .hero .badge { background: rgba(0, 198, 255, 0.1); color: var(--main-neon); padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 25px; display: inline-block; border: 1px solid var(--main-neon); }
+        .phone-link { color: #fff; text-decoration: none; font-weight: bold; background: rgba(0, 198, 255, 0.08); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--neon); transition: all 0.3s; }
+        .phone-link:hover { background: var(--neon); color: #0d0e12; box-shadow: 0 0 20px var(--sh); transform: translateY(-2px); }
+        .hero { padding: 100px 8% 120px 8%; text-align: center; }
+        .hero .badge { background: rgba(0, 198, 255, 0.1); color: var(--neon); padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 25px; display: inline-block; border: 1px solid var(--neon); }
         .hero h1 { font-size: 52px; margin-bottom: 25px; color: #fff; font-weight: 800; line-height: 1.25; }
-        .hero h1 span { color: var(--main-neon); text-shadow: 0 0 20px var(--neon-shadow); }
+        .hero h1 span { color: var(--neon); text-shadow: 0 0 20px var(--sh); }
         .hero p { font-size: 19px; color: #9ca3af; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6; }
         
         .services { padding: 60px 8%; text-align: center; }
@@ -51,86 +63,112 @@
         .grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
         .card-label { width: 31%; cursor: pointer; display: block; text-align: left; }
         .card-input { display: none; }
-        .card { background: #161822; padding: 35px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.02); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; height: 100%; }
-        .card:hover { transform: translateY(-8px) scale(1.02); background: #1c1f2f; border-color: var(--main-neon); box-shadow: 0 20px 40px rgba(0, 198, 255, 0.1), 0 15px 30px rgba(0,0,0,0.5); }
-        .card h3 { font-size: 22px; margin-bottom: 20px; color: #fff; transition: color 0.3s ease, transform 0.3s ease; }
-        .card:hover h3 { color: var(--main-neon); transform: translateX(5px); }
-        .card .hint { font-size: 13px; color: var(--main-neon); margin-bottom: 15px; opacity: 0.7; font-weight: 500; }
+        
+        .card { background: #161822; padding: 35px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.02); animation: var(--pulse); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; }
+        .card:hover { transform: translateY(-8px) scale(1.02); background: #1c1f2f; border-color: var(--neon); box-shadow: 0 20px 40px rgba(0, 198, 255, 0.1), 0 15px 30px rgba(0,0,0,0.5); }
+        .card h3 { font-size: 22px; margin-bottom: 20px; color: #fff; }
+        .card:hover h3 { color: var(--neon); transform: translateX(5px); }
+        .card .hint { font-size: 13px; color: var(--neon); margin-bottom: 15px; opacity: 0.7; font-weight: 500; }
         .card ul { list-style: none; color: #9ca3af; font-size: 15px; line-height: 2; }
-        .card ul li::before { content: "✓ "; color: var(--main-neon); margin-right: 5px; font-weight: bold; }
-        .card-details { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0, 198, 255, 0.03); border-radius: 10px; padding: 0 15px; border: 0 solid rgba(0, 198, 255, 0.15); }
+        .card ul li::before { content: "✓ "; color: var(--neon); margin-right: 5px; font-weight: bold; }
+        .card-details { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); background: rgba(0, 198, 255, 0.03); border-radius: 10px; padding: 0 15px; }
         .card-details p { font-size: 14px; color: #e5e7eb; line-height: 1.6; padding: 15px 0; }
-        .card-input:checked + .card { background: #1c1f2f; border-color: var(--main-neon); box-shadow: 0 0 25px rgba(0, 198, 255, 0.15); }
+        .card-input:checked + .card { background: #1c1f2f; border-color: var(--neon); box-shadow: 0 0 25px rgba(0, 198, 255, 0.15); }
         .card-input:checked + .card .card-details { max-height: 350px; opacity: 1; padding: 5px 15px; margin-top: 15px; border: 1px solid rgba(0, 198, 255, 0.15); }
+        
         .portfolio { padding: 60px 8%; text-align: center; }
         .portfolio h2 { font-size: 36px; margin-bottom: 50px; color: #fff; }
         .portfolio-grid { display: flex; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
-        .portfolio-item { width: 31%; background: #161822; border-radius: 18px; padding: 30px; text-align: left; border: 1px solid rgba(255,255,255,0.02); transition: all 0.3s ease; }
-        .portfolio-item:hover { border-color: rgba(255,255,255,0.1); background: #1a1d2c; transform: scale(1.01); }
-        .portfolio-item h4 { font-size: 19px; color: var(--main-neon); margin-bottom: 12px; }
+        .portfolio-item { width: 31%; background: #161822; border-radius: 18px; padding: 30px; text-align: left; border: 1px solid rgba(255,255,255,0.02); animation: var(--pulse); transition: all 0.3s ease; }
+        .portfolio-item:hover { border-color: var(--neon); transform: scale(1.01); }
+        .portfolio-item h4 { font-size: 19px; color: var(--neon); margin-bottom: 12px; }
         .portfolio-item p { font-size: 14px; color: #9ca3af; line-height: 1.6; }
-        
-        /* Инновационный калькулятор на чистом CSS с помощью радиокнопок */
-        .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid var(--main-neon); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .calc-section { background: linear-gradient(145deg, #161822, #0f1017); padding: 45px; border-radius: 24px; max-width: 650px; margin: 60px auto; text-align: center; border: 1px solid var(--neon); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
         .calc-section h2 { font-size: 32px; margin-bottom: 25px; color: #fff; }
-        .calc-toggle { display: none; }
         .calc-options { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
         .calc-btn { background: #0d0e12; border: 1px solid rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 10px; cursor: pointer; color: #9ca3af; font-weight: 500; transition: 0.3s; }
-        .calc-btn:hover { border-color: var(--main-neon); color: #fff; }
-        
+        .calc-btn:hover { border-color: var(--neon); color: #fff; }
         .result-box { background: rgba(0, 198, 255, 0.04); padding: 25px; border-radius: 14px; margin-top: 25px; border: 1px dashed rgba(0, 198, 255, 0.2); }
-        .result-box span { font-size: 38px; font-weight: bold; color: var(--main-neon); text-shadow: 0 0 15px var(--neon-shadow); }
+        .result-box span { font-size: 38px; font-weight: bold; color: var(--neon); text-shadow: 0 0 15px var(--neon-shadow); }
         .result-box .val { display: none; }
         
-        /* Логика отображения цены на чистом CSS */
-        #calc-odezhda:checked ~ .calc-section .opt-o { background: var(--main-neon); color: #0d0e12; border-color: var(--main-neon); box-shadow: 0 0 15px var(--neon-shadow); }
+        #calc-odezhda:checked ~ .calc-section .opt-o { background: var(--neon); color: #0d0e12; border-color: var(--neon); box-shadow: 0 0 15px var(--sh); }
         #calc-odezhda:checked ~ .calc-section .val-o { display: block; }
-        #calc-reklama:checked ~ .calc-section .opt-r { background: var(--main-neon); color: #0d0e12; border-color: var(--main-neon); box-shadow: 0 0 15px var(--neon-shadow); }
+        #calc-reklama:checked ~ .calc-section .opt-r { background: var(--neon); color: #0d0e12; border-color: var(--neon); box-shadow: 0 0 15px var(--sh); }
         #calc-reklama:checked ~ .calc-section .val-r { display: block; }
-        #calc-pos:checked ~ .calc-section .opt-p { background: var(--main-neon); color: #0d0e12; border-color: var(--main-neon); box-shadow: 0 0 15px var(--neon-shadow); }
+        #calc-pos:checked ~ .calc-section .opt-p { background: var(--neon); color: #0d0e12; border-color: var(--neon); box-shadow: 0 0 15px var(--sh); }
         #calc-pos:checked ~ .calc-section .val-p { display: block; }
 
+        /* Стили конструктора ТЗ заказов */
+        .tz-builder { background: rgba(0, 198, 255, 0.02); border: 1px dashed rgba(0, 198, 255, 0.2); padding: 25px; border-radius: 14px; margin-bottom: 30px; text-align: left; }
+        .tz-title { color: #fff; font-size: 15px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
+        .tz-label { display: block; font-size: 12px; color: #888; margin-bottom: 8px; }
+        .tz-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tz-btn { flex: 1; text-align: center; background: #0d0e12; border: 1px solid rgba(255,255,255,0.08); padding: 10px; border-radius: 8px; font-size: 13px; color: #9ca3af; cursor: pointer; transition: 0.2s; user-select: none; }
+        .tz-btn:hover { border-color: var(--neon); color: #fff; }
+        
+        #type-merch:checked ~ .contacts-container .btn-m,
+        #type-reklama:checked ~ .contacts-container .btn-r,
+        #time-fast:checked ~ .contacts-container .btn-f,
+        #time-norm:checked ~ .contacts-container .btn-n { background: var(--neon); color: #0d0e12; border-color: var(--neon); font-weight: bold; box-shadow: 0 0 10px var(--sh); }
+
         .contacts-section { padding: 80px 8%; text-align: center; background: #090a0d; }
-        .contacts-container { max-width: 550px; margin: 0 auto; text-align: center; background: #161822; padding: 45px 35px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .contacts-section h2 { font-size: 36px; margin-bottom: 20px; color: #fff; }
+        .contacts-container { max-width: 550px; margin: 0 auto; text-align: center; background: #161822; padding: 45px 35px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); animation: var(--pulse); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         .contacts-container p { color: #9ca3af; font-size: 16px; line-height: 1.7; }
-        
         .btn-box { display: flex !important; flex-direction: column !important; gap: 15px !important; margin-top: 45px !important; }
-        .btn-submit { width: 100%; background: var(--main-neon); color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
-        .btn-primary { animation: pulseBtn 2s infinite; }
-        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.015); box-shadow: 0 0 20px var(--neon-shadow); } 100% { transform: scale(1); } }
-        .btn-secondary { background: transparent; color: var(--main-neon); border: 2px solid var(--main-neon); }
-        .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 198, 255, 0.15); }
-        
+        .btn-submit { width: 100%; background: var(--neon); color: #0d0e12; padding: 18px; border-radius: 10px; border: none; font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; }
+        .btn-submit:hover { background: #00aed4; transform: translateY(-3px); box-shadow: 0 12px 25px var(--sh); }
+        .btn-secondary { background: transparent; color: var(--neon); border: 2px solid var(--neon); }
+        .btn-secondary:hover { background: rgba(0, 198, 255, 0.08); color: #fff; }
         .delivery-badge { background: rgba(0, 198, 255, 0.03); border: 1px solid rgba(0, 198, 255, 0.2); padding: 25px; border-radius: 16px; margin-top: 35px; text-align: left; }
         .delivery-badge h4 { color: #00ffcc; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
         .delivery-badge ul { list-style: none; color: #e5e7eb; font-size: 14px; line-height: 1.8; }
-        .delivery-badge ul li::before { content: "⚡ "; color: #00ffcc; margin-right: 5px; font-weight: bold; }
-        footer { padding: 40px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.8; }
+        footer { padding: 40px 8%; text-align: center; color: #4b5563; font-size: 14px; background: #0d0e12; border-top: 1px solid rgba(255,255,255,0.05); }
         .invisible-input { display: none; }
     </style>
 </head>
 <body>
-    <!-- Скрытые триггеры кастомизации и калькулятора на чистом HTML -->
-    <input type="radio" name="theme-select" id="theme-cyan" class="invisible-input" checked>
-    <input type="radio" name="theme-select" id="theme-matrix" class="invisible-input">
-    <input type="radio" name="theme-select" id="theme-purple" class="invisible-input">
+    <!-- Все триггеры кастомизации, калькулятора и ТЗ на чистом HTML -->
+    <input type="radio" name="theme-freq" id="hz-443" class="invisible-input" checked>
+    <input type="radio" name="theme-freq" id="hz-80" class="invisible-input">
+    <input type="radio" name="theme-freq" id="hz-8080" class="invisible-input">
     <input type="checkbox" id="toggle-panel" class="invisible-input">
+    <input type="checkbox" id="xray-on" class="invisible-input">
+    
     <input type="radio" name="calc-select" id="calc-odezhda" class="invisible-input" checked>
     <input type="radio" name="calc-select" id="calc-reklama" class="invisible-input">
     <input type="radio" name="calc-select" id="calc-pos" class="invisible-input">
+    
+    <input type="radio" name="tz-type" id="type-merch" class="invisible-input" checked>
+    <input type="radio" name="tz-type" id="type-reklama" class="invisible-input">
+    <input type="radio" name="tz-time" id="time-fast" class="invisible-input" checked>
+    <input type="radio" name="tz-time" id="time-norm" class="invisible-input">
 
     <header>
+        <!-- Клик на ТАНДЕМ открывает скрытый пульт управления -->
         <label class="logo-btn" for="toggle-panel"><span>ТАНДЕМ</span></label>
         <nav><a href="#services">Услуги</a><a href="#portfolio">Работы</a><a href="#calc">Калькулятор</a><a href="#contacts">Контакты</a></nav>
         <a href="tel:+79500503004" class="phone-link">8 (950) 050-30-04</a>
     </header>
 
-    <div id="custom-panel">
-        <span style="font-size: 12px; color: #9ca3af; font-weight: bold;">СТИЛЬ:</span>
-        <label class="color-dot" style="background: #00c6ff;" for="theme-cyan"></label>
-        <label class="color-dot" style="background: #00ff66;" for="theme-matrix"></label>
-        <label class="color-dot" style="background: #cc00ff;" for="theme-purple"></label>
+    <!-- Скрытый пульт кастомизации и неона X-RAY -->
+    <div id="dev-panel">
+        <div class="dev-title">>_ TANDEM_CONTROL_PANEL</div>
+        <div class="dev-group">
+            <span class="dev-label">COLOR SPECTRUM (СМЕНА ЦВЕТА СЛОВА И КНОПОК):</span>
+            <div class="freq-selector">
+                <label class="freq-btn f-443" for="hz-443">Голубой</label>
+                <label class="freq-btn f-80" for="hz-80">Зеленый</label>
+                <label class="freq-btn f-8080" for="hz-8080">Фиолетовый</label>
+            </div>
+        </div>
+        <div class="dev-group">
+            <span class="dev-label">VISUAL EFFECT:</span>
+            <div class="toggle-row">
+                <span class="toggle-name">⚡ НЕОНОВАЯ ПОДСВЕТКА [X-RAY]</span>
+                <label class="toggle-btn ad-on" for="xray-on">ВКЛ / ВЫКЛ</label>
+            </div>
+        </div>
     </div>
     
     <section class="hero">
@@ -187,6 +225,7 @@
             </label>
         </div>
     </section>
+    
     <section class="portfolio" id="portfolio">
         <h2>Примеры готовой продукции</h2>
         <div class="portfolio-grid">
@@ -204,7 +243,7 @@
             <label class="calc-btn opt-p" for="calc-pos">📦 POS-материалы</label>
         </div>
         <div class="result-box">
-            <p style="font-size: 14px; color: #9ca3af; margin-bottom: 5px;">Ориентировочная стоимость за партию (100 шт):</p>
+            <p style="font-size: 14px; color: #9ca3af; margin-bottom: 5px;">Ориентировочная стоимость за тираж (100 шт):</p>
             <span class="val val-o">35 000 ₽</span>
             <span class="val val-r">15 000 ₽</span>
             <span class="val val-p">25 000 ₽</span>
@@ -214,8 +253,25 @@
     <section class="contacts-section" id="contacts">
         <h2>Обсудить ваш проект</h2>
         <div class="contacts-container">
+            
+            <!-- КОНСТРУКТОР ТЗ ЗАКАЗОВ -->
+            <div class="tz-builder">
+                <div class="tz-title">📋 Конструктор заказа ТАНДЕМ:</div>
+                <span class="tz-label">НАПРАВЛЕНИЕ:</span>
+                <div class="tz-row">
+                    <label class="tz-btn btn-m" for="type-merch">👕 Мерч / Одежда</label>
+                    <label class="tz-btn btn-r" for="type-reklama">🏢 Вывеска / Наружка</label>
+                </div>
+                <span class="tz-label">СРОЧНОСТЬ:</span>
+                <div class="tz-row">
+                    <label class="tz-btn btn-f" for="time-fast">⚡ Срочно / Горит</label>
+                    <label class="tz-btn btn-n" for="time-norm">📅 Стандартный срок</label>
+                </div>
+            </div>
+
             <p>Свяжитесь с нами удобным для вас способом. Вы можете позвонить напрямую по телефону или скопировать адрес нашей электронной почты для отправки технического задания.</p>
             <div class="btn-box"><a href="tel:+79500503004" class="btn-submit btn-primary">Позвонить по телефону</a><a href="mailto:Tandem38-irk@yandex.ru?subject=Заказ расчета проекта ТАНДЕМ" class="btn-submit btn-secondary">Написать на почту: Tandem38-irk@yandex.ru</a></div>
+            
             <div class="delivery-badge">
                 <h4>💼 Условия сотрудничества</h4>
                 <ul>
