@@ -17,3 +17,11 @@ if(heroVisual && !window.matchMedia('(prefers-reduced-motion: reduce)').matches)
     heroVisual.style.transform='';
   });
 }
+
+
+// Subtle pointer depth for the hero visual.
+const hv=document.querySelector('#heroVisual');
+if(hv && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  hv.addEventListener('pointermove',e=>{const r=hv.getBoundingClientRect(),x=e.clientX/r.width-.5,y=e.clientY/r.height-.5;hv.style.transform=`perspective(1100px) rotateX(${(-y*2).toFixed(2)}deg) rotateY(${(x*2).toFixed(2)}deg)`});
+  hv.addEventListener('pointerleave',()=>hv.style.transform='');
+}
