@@ -60,6 +60,9 @@ button{font:inherit}
 }
 .brand-mark:after{content:"";position:absolute;inset:-20%;background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);transform:translateX(-80%);animation:brandShine 7s ease-in-out infinite}
 .brand-mark img{width:37px;height:37px;object-fit:contain}
+/* POS page: keep the header logo at the same compact size as the other pages */
+body.pos-page .brand-mark{width:44px;height:44px;flex:0 0 44px}
+body.pos-page .brand-mark img{width:37px!important;height:37px!important;max-width:37px!important;max-height:37px!important;object-fit:contain}
 .brand-word strong{display:block;font-size:17px;letter-spacing:.15em;font-weight:850;line-height:1}
 .brand-word small{display:block;color:#71899d;font-size:7px;letter-spacing:.22em;margin-top:5px}
 .brand-word small i{display:inline-block;width:3px;height:3px;border-radius:50%;background:#55c8ff;margin:0 5px 2px}
@@ -279,6 +282,9 @@ button{font:inherit}
   .mobile-menu.open{display:block}
 }
 @media(max-width:650px){
+  body.pos-page .brand-mark{width:40px;height:40px;flex-basis:40px}
+  body.pos-page .brand-mark img{width:34px!important;height:34px!important;max-width:34px!important;max-height:34px!important}
+
   .container{width:calc(100% - 24px)}
   .topline{display:none}
   .nav{height:70px}
