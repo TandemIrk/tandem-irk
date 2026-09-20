@@ -1,27 +1,63 @@
-document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'translateY(0)'}],{duration:550,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'})}),{threshold:.08});
-document.querySelectorAll('.card,.panel,.work,.step,.band-item,.contact-card').forEach(e=>{e.style.opacity=0;io.observe(e)});
 
+(() => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Gentle hero interaction: the visual follows the cursor by only a few pixels.
-const heroVisual=document.querySelector('.hero-visual');
-if(heroVisual && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  heroVisual.addEventListener('pointermove',e=>{
-    const r=heroVisual.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    heroVisual.style.transform=`perspective(900px) rotateX(${(-y*2.2).toFixed(2)}deg) rotateY(${(x*2.2).toFixed(2)}deg)`;
+  document.querySelectorAll('[data-year]').forEach(el => {
+    el.textContent = new Date().getFullYear();
   });
-  heroVisual.addEventListener('pointerleave',()=>{
-    heroVisual.style.transform='';
+
+  // Mobile navigation
+  const toggle = document.querySelector('.menu-toggle');
+  const mobile = document.querySelector('.mobile-menu');
+  if (toggle && mobile) {
+    toggle.addEventListener('click', () => {
+      const open = mobile.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.classList.toggle('open', open);
+    });
+    mobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobile.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+
+  // Smooth in-page links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block:'start'});
+      }
+    });
   });
-}
 
+  // Soft scroll reveals — restrained, not noisy.
+  const revealItems = document.querySelectorAll('.card,.panel,.work,.step,.band-item,.contact-card');
+  if (!reduced && 'IntersectionObserver' in window) {
+    revealItems.forEach(el => el.classList.add('reveal-ready'));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      });
+    }, {threshold:.08, rootMargin:'0px 0px -30px'});
+    revealItems.forEach(el => io.observe(el));
+  }
 
-// Subtle pointer depth for the hero visual.
-const hv=document.querySelector('#heroVisual');
-if(hv && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-  hv.addEventListener('pointermove',e=>{const r=hv.getBoundingClientRect(),x=e.clientX/r.width-.5,y=e.clientY/r.height-.5;hv.style.transform=`perspective(1100px) rotateX(${(-y*2).toFixed(2)}deg) rotateY(${(x*2).toFixed(2)}deg)`});
-  hv.addEventListener('pointerleave',()=>hv.style.transform='');
-}
+  // Very light depth effect on the hero visual.
+  const hero = document.querySelector('#heroVisual');
+  if (hero && !reduced) {
+    hero.addEventListener('pointermove', e => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX-r.left)/r.width-.5;
+      const y = (e.clientY-r.top)/r.height-.5;
+      hero.style.transform = `perspective(1100px) rotateX(${(-y*1.7).toFixed(2)}deg) rotateY(${(x*1.7).toFixed(2)}deg)`;
+    });
+    hero.addEventListener('pointerleave', () => hero.style.transform = '');
+  }
+})();
